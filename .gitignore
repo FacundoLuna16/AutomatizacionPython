@@ -1,1 +1,6 @@
-./autoPrueba/*
+autoPrueba/
+
+reports/*
+
+!./test/TestCaseWiki.py
+./test/*
