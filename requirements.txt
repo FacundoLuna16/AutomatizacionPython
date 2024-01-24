@@ -1,0 +1,3 @@
+# requirements.txt
+pytest
+selenium==4.8.3
