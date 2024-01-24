@@ -2,5 +2,4 @@ autoPrueba/
 
 reports/*
 
-!./test/TestCaseWiki.py
-./test/*
+test/__pycache__/*
