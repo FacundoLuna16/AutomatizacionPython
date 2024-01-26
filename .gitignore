@@ -3,3 +3,4 @@ autoPrueba/
 reports/*
 
 test/__pycache__/*
+config/__pycache__/*

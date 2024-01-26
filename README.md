@@ -30,6 +30,13 @@ en nuestro proyecto deberemos tener un archivo requerements.txt en el cual tendr
 ![imagen](./img/requirements.png)
 
 Para instalarlas ejecutamos el siguiente comando 
-```
+```bash
+
 pip install -r requirements.txt
+```
+
+## Para ejecutar colocamos
+
+```bash
+python -m pytest -v -s .\test\TestCaseWiki.py
 ```
