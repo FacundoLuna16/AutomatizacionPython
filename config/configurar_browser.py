@@ -10,38 +10,6 @@ class BrowserConfig:
     def __init__(self, browser):
         self.BROWSER = browser
 
-    def firefox_options(self):
-        options = webdriver.FirefoxOptions()
-        return options
-
-    def chrome_options(self):
-        options = webdriver.ChromeOptions()
-        options.add_argument("--disable-notifications")
-        options.add_argument("--disable-extensions")
-        options.add_argument('--disable-popup-blocking')
-        options.add_argument("--disable-infobar")
-        options.add_argument("--start-maximized")
-        return options
-
-    def chrome_headless_options(self):
-        options = webdriver.ChromeOptions()
-        options.add_argument("--headless=new")
-        options.add_argument("--start-maximized")
-        options.add_argument("--disable-notifications")
-        return options
-
-    def set_options(self):
-        browser = self.BROWSER
-        options = None
-        if browser == 'firefox':
-            options = self.firefox_options()
-        elif browser == 'chrome-headless':
-            options = self.chrome_headless_options()
-        elif browser == 'chrome':
-            options = self.chrome_options()
-        logging.info(f"Setting capabilities for {browser}...")
-        return options
-
     def select_browser(self):
         browser = self.BROWSER
         driver = None
