@@ -4,6 +4,7 @@ class StackResultPage:
     """
     Clase que representa la Page Object de la página de resultados de Stack Overflow en español.
     """
+
     def __init__(self, driver):
         self.driver = driver
 
@@ -11,4 +12,5 @@ class StackResultPage:
         """
         Método para validar que el texto dado está presente en la URL actual.
         """
-        assert texto in self.driver.current_url, f"El valor {texto} no se encuentra en la URL"
+        assert texto in self.driver.current_url, f"El valor {
+            texto} no se encuentra en la URL"
