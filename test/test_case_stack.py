@@ -39,13 +39,37 @@ class Tests:
         """
         Test para verificar la navegación a la página de usuarios.
         """
-        driver.get("https://es.stackoverflow.com/")
+        with allure.step("Nos dirigimos a la pagina Stack Overflow en español"):
+            driver.get("https://es.stackoverflow.com/")
+        
         home_page = StackHomePage(driver)
-        home_page.click_aceptar_cookies()
-        home_page.click_usuarios()
+        with allure.step("Aceptamos las cookies"):
+            home_page.click_aceptar_cookies()
+        with allure.step("Nos dirigimos a la página de usuarios"):
+            home_page.click_usuarios()
 
         result_page = StackResultPage(driver)
-        result_page.validar_contenido_URL("users")
+        with allure.step("Validamos la redirección"):
+            result_page.validar_contenido_URL("users")
+
+    # saltear este test 
+    @pytest.mark.skip(reason="en desarrollo")
+    def test_redireccion_sobre_nosotros(self,driver):
+        """
+        Test para verificar la navegación a la página de usuarios.
+        """
+        with allure.step("Nos dirigimos a la pagina Stack Overflow en español"):
+            driver.get("https://es.stackoverflow.com/")
+        
+        home_page = StackHomePage(driver)
+        with allure.step("Aceptamos las cookies"):
+            home_page.click_aceptar_cookies()
+        #with allure.step("Nos dirigimos a la página de usuarios"):
+            #home_page.click_sobre_nosotros()
+
+        result_page = StackResultPage(driver)
+        with allure.step("Validamos la redirección"):
+            result_page.validar_contenido_URL("about")
 
 if __name__ == "__main__":
     pytest.main()
