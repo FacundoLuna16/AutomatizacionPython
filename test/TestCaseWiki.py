@@ -14,6 +14,11 @@ class Tests:
 
     @pytest.mark.parametrize("var_buscar, resultado", parametros_busqueda)
     def test_validar_caja_texto_nuevo(self, var_buscar, resultado,driver):#driver viene de conftest.py los demas parametros vienen del parametrize
+        print("Abrimos la página de Wikipedia")
+        driver.get("http://wikipedia.org")
+        print("Validamos que se cargue la página")
+        WebDriverWait(driver, 10).until(EC.visibility_of_element_located((By.ID, "searchInput")))
+        print("Validamos que se cargue el campo de búsqueda")
         caja_busqueda = driver.find_element(By.ID, "searchInput")
         print("Limpiamos la caja de búsqueda")
         caja_busqueda.clear()
