@@ -5,9 +5,10 @@ from config.configurar_browser import BrowserConfig
 
 def pytest_addoption(parser):
     parser.addoption("--browser", action="store", default="chrome", help="Escoger navegador: chrome o edge")
-    #TODO agregar otra opción para el ambiente de pruebas
-    #TODO agregar una opcion para pasar la url por parametro
 
+
+def pytest_html_report_title(report):
+    report.title = "Reporte de pruebas automatizadas"
 
 @pytest.fixture(autouse=True)
 def driver(request):
