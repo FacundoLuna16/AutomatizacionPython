@@ -10,7 +10,7 @@ El proyecto está organizado en varias carpetas, cada una con un propósito espe
 
 - **config:** Contiene archivos de configuración para la automatización de pruebas.
 
-- **img:** Almacena imágenes relacionadas con el proyecto o a la documentacion de archivos MarkDown.
+- **img:** Almacena imágenes relacionadas con el proyecto o a la documentacion.
 
 - **pages:** Contiene archivos que representan las páginas o componentes a probar.
 

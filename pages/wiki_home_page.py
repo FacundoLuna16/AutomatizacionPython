@@ -21,6 +21,7 @@ class WikiHomePage:
     def __init__(self, driver):
         self.driver = driver
 
+    @allure.step("Seleccionamos el idioma \"{idioma}\"")
     def seleccionar_idioma(self, idioma: str):
         """
         Selección de idioma en la página de Wikipedia.
@@ -34,6 +35,17 @@ class WikiHomePage:
         assert idioma in combo.first_selected_option.text, f"El idioma seleccionado no es el correcto. Debería ser {
             idioma}"
 
+    @allure.step("Limpiamos el contenido de la caja de búsqueda")
+    def limpia_caja(self):
+        """
+        Limpia la caja de texto
+        """
+        WebDriverWait(self.driver, 10).until(
+            EC.presence_of_element_located(self.caja)
+        )
+        self.driver.find_element(*self.caja).clear()
+
+    @allure.step("Ingresamos el texto \"{dato}\" en la caja de búsqueda")
     def ingresar_dato_caja_busqueda(self, dato):
         """
         Ingreso de un dato en la caja de búsqueda.
@@ -42,6 +54,6 @@ class WikiHomePage:
             EC.presence_of_element_located(self.caja)
         )
 
-        self.driver.find_element(*self.caja).clear()
         self.driver.find_element(*self.caja).send_keys(dato)
-        self.driver.find_element(*self.caja).send_keys(Keys.ENTER)
+        with allure.step("presionamos la tecla ENTER"):
+            self.driver.find_element(*self.caja).send_keys(Keys.ENTER)

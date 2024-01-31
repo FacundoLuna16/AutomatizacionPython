@@ -15,11 +15,9 @@ class Tests:
             driver.get("http://wikipedia.org")
 
         home_page = WikiHomePage(driver)
-        with allure.step("Seleccionamos el idioma ingles"):
-            home_page.seleccionar_idioma("English")
-
-        with allure.step("Buscamos pytest"):
-            home_page.ingresar_dato_caja_busqueda("pytest")
+        home_page.seleccionar_idioma("English")
+        home_page.limpia_caja()
+        home_page.ingresar_dato_caja_busqueda("pytest")
 
         with allure.step("Validamos que el titulo de la pagina sea el correcto"):
             assert "pytest" in driver.title, f"El título de la página no es el correcto. Debería ser pytest"
