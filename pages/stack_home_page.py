@@ -2,6 +2,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+import allure
 
 
 class StackHomePage:
@@ -19,6 +20,7 @@ class StackHomePage:
     def __init__(self, driver):
         self.driver = driver
 
+    @allure.step("Hacemos clic en el botón de aceptar cookies")
     def click_aceptar_cookies(self):
         """
         Método para hacer clic en el botón de aceptar cookies.
@@ -29,10 +31,18 @@ class StackHomePage:
 
         if self.driver.find_element(*self.btn_aceptar_cookies).is_displayed():
             self.driver.find_element(*self.btn_aceptar_cookies).click()
-            print("Aceptamos las cookies")
-        else:
-            print("Ya se aceptaron las cookies")
 
+    @allure.step("limpiamos el contenido de la caja de búsqueda")
+    def limpiar_caja_busqueda(self):
+        """
+        Método para limpiar el contenido de la caja de búsqueda.
+        """
+        WebDriverWait(self.driver, 10).until(
+            EC.visibility_of_element_located(self.buscador)
+        )
+        self.driver.find_element(*self.buscador).clear()
+
+    @allure.step("buscamos el texto \"{texto}\" en la caja de búsqueda")
     def buscar(self, texto):
         """
         Método para realizar una búsqueda en la caja de búsqueda.
@@ -40,16 +50,11 @@ class StackHomePage:
         WebDriverWait(self.driver, 10).until(
             EC.visibility_of_element_located(self.buscador)
         )
-        print("Validamos que se cargue el campo de búsqueda")
-        if self.driver.find_element(*self.buscador).is_displayed():
-            print("La caja de búsqueda está visible")
-            self.driver.find_element(*self.buscador).clear()
-            print("Limpiamos la caja de búsqueda")
-            self.driver.find_element(*self.buscador).send_keys(texto)
-            print(f"Ingresamos el valor {texto} en la caja de búsqueda")
+        self.driver.find_element(*self.buscador).send_keys(texto)
+        with allure.step("presionamos la tecla ENTER"):
             self.driver.find_element(*self.buscador).send_keys(Keys.ENTER)
-            print("Presionamos ENTER")
 
+    @allure.step("Hacemos clic en el botón para reedirigirnos a la página de usuarios")
     def click_usuarios(self):
         """
         Método para dirigirse a la sección de usuarios.
@@ -63,6 +68,7 @@ class StackHomePage:
         else:
             print("El botón de usuarios no está visible")
 
+    @allure.step("Verificamos que la URL contenga el texto esperado")
     def verificar_contenido_URL(self, texto):
         """
         Método para verificar que la URL contenga el texto esperado.
@@ -70,6 +76,5 @@ class StackHomePage:
         WebDriverWait(self.driver, 10).until(
             EC.url_contains(texto)
         )
-        print("Validamos que la URL contenga el texto esperado")
         assert texto in self.driver.current_url, f"La URL no contiene el texto {
             texto}"

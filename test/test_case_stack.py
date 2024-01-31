@@ -22,20 +22,12 @@ class Tests:
         Test para validar la funcionalidad de la caja de búsqueda.
         """
         with allure.step("Nos dirigimos a la pagina Stack Overflow en español"):
-            print("Abrimos la página de Stack Overflow en español")
             driver.get("https://es.stackoverflow.com/")
-
-        with allure.step("Validamos que se cargue la página"):
-            home_page = StackHomePage(driver)
-
-        with allure.step("Aceptamos las cookies"):
-            home_page.click_aceptar_cookies()
-        with allure.step("realizamos la busqueda"):
-            home_page.buscar(var_buscar)
-
-        with allure.step("Validamos la busqueda"):
-            result_page = StackResultPage(driver)
-            result_page.validar_contenido_URL(resultado)
+        home_page = StackHomePage(driver)
+        home_page.click_aceptar_cookies()
+        home_page.buscar(var_buscar)
+        result_page = StackResultPage(driver)
+        result_page.validar_contenido_URL(resultado)
 
     @allure.title("Validar redireccion a la página de usuarios")
     @allure.description("Validar que se redireccione a la página de usuarios")
@@ -47,14 +39,11 @@ class Tests:
             driver.get("https://es.stackoverflow.com/")
 
         home_page = StackHomePage(driver)
-        with allure.step("Aceptamos las cookies"):
-            home_page.click_aceptar_cookies()
-        with allure.step("Nos dirigimos a la página de usuarios"):
-            home_page.click_usuarios()
+        home_page.click_aceptar_cookies()
+        home_page.click_usuarios()
 
         result_page = StackResultPage(driver)
-        with allure.step("Validamos la redirección"):
-            result_page.validar_contenido_URL("users")
+        result_page.validar_contenido_URL("users")
 
 
 if __name__ == "__main__":
