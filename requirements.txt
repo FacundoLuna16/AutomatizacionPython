@@ -1,7 +1,7 @@
 # requirements.txt
 pytest
-selenium==4.8.3
+selenium
 webdriver-manager
 allure-pytest
 pytest-xdist
-#faker
+faker
