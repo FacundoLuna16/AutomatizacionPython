@@ -10,11 +10,11 @@ class StackHomePage:
     Clase que representa la Page Object de la página principal de Stack Overflow en español.
 
     Atributos:
-    - `txt_buscador`: Selector de la caja de búsqueda.
-    - `btn_aceptar_cookies`: Selector del botón de aceptar cookies.
-    - `btn_iniciar_sesion`: Selector del botón de iniciar sesión.
-    - `btn_registrarse`: Selector del botón de registrarse.
-    - `btn_usuario`: Selector del botón de usuario.
+       - `txt_locator_buscador`: Selector de la caja de búsqueda.
+       - `btn_locator_aceptar_cookies`: Selector del botón de aceptar cookies.
+       - `btn_locator_iniciar_sesion`: Selector del botón de iniciar sesión.
+       - `btn_locator_registrarse`: Selector del botón de registrarse.
+       - `btn_locator_usuario`: Selector del botón de usuario.
 
     Métodos:
     - `__init__(self, driver)`: Inicializa la clase con el controlador del navegador.
