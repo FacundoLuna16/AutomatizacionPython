@@ -8,9 +8,20 @@ import allure
 class StackHomePage:
     """
     Clase que representa la Page Object de la página principal de Stack Overflow en español.
+
+    Atributos:
+    - `txt_buscador`: Selector de la caja de búsqueda.
+    - `btn_aceptar_cookies`: Selector del botón de aceptar cookies.
+    - `btn_iniciar_sesion`: Selector del botón de iniciar sesión.
+    - `btn_registrarse`: Selector del botón de registrarse.
+    - `btn_usuario`: Selector del botón de usuario.
+
+    Métodos:
+    - `__init__(self, driver)`: Inicializa la clase con el controlador del navegador.
+
     """
 
-    buscador = (By.XPATH, "//input[@placeholder='Buscar…']")
+    txt_buscador = (By.XPATH, "//input[@placeholder='Buscar…']")
     btn_aceptar_cookies = (
         By.XPATH, "//button[@id='onetrust-accept-btn-handler']")
     btn_iniciar_sesion = (By.XPATH, "//a[normalize-space()='Iniciar sesión']")
@@ -18,10 +29,15 @@ class StackHomePage:
     btn_usuario = (By.CSS_SELECTOR, "#nav-users")
 
     def __init__(self, driver):
+        """
+        Inicializa la clase con el controlador del navegador.
+
+        :param driver: Instancia del controlador del navegador.
+        """
         self.driver = driver
 
     @allure.step("Hacemos clic en el botón de aceptar cookies")
-    def click_aceptar_cookies(self):
+    def click_aceptar_cookies(self) -> None:
         """
         Método para hacer clic en el botón de aceptar cookies.
         """
@@ -33,7 +49,7 @@ class StackHomePage:
             self.driver.find_element(*self.btn_aceptar_cookies).click()
 
     @allure.step("limpiamos el contenido de la caja de búsqueda")
-    def limpiar_caja_busqueda(self):
+    def limpiar_caja_busqueda(self) -> None:
         """
         Método para limpiar el contenido de la caja de búsqueda.
         """
@@ -43,9 +59,11 @@ class StackHomePage:
         self.driver.find_element(*self.buscador).clear()
 
     @allure.step("buscamos el texto \"{texto}\" en la caja de búsqueda")
-    def buscar(self, texto):
+    def buscar(self, texto) -> None:
         """
         Método para realizar una búsqueda en la caja de búsqueda.
+
+        :param texto: Texto a buscar.
         """
         WebDriverWait(self.driver, 10).until(
             EC.visibility_of_element_located(self.buscador)
@@ -55,7 +73,7 @@ class StackHomePage:
             self.driver.find_element(*self.buscador).send_keys(Keys.ENTER)
 
     @allure.step("Hacemos clic en el botón para reedirigirnos a la página de usuarios")
-    def click_usuarios(self):
+    def click_usuarios(self) -> None:
         """
         Método para dirigirse a la sección de usuarios.
         """
@@ -69,9 +87,11 @@ class StackHomePage:
             print("El botón de usuarios no está visible")
 
     @allure.step("Verificamos que la URL contenga el texto esperado")
-    def verificar_contenido_URL(self, texto):
+    def verificar_contenido_URL(self, texto) -> None:
         """
         Método para verificar que la URL contenga el texto esperado.
+
+        :param texto: Texto a buscar.
         """
         WebDriverWait(self.driver, 10).until(
             EC.url_contains(texto)
