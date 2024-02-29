@@ -54,9 +54,9 @@ class StackHomePage:
         Método para limpiar el contenido de la caja de búsqueda.
         """
         WebDriverWait(self.driver, 10).until(
-            EC.visibility_of_element_located(self.buscador)
+            EC.visibility_of_element_located(self.txt_buscador)
         )
-        self.driver.find_element(*self.buscador).clear()
+        self.driver.find_element(*self.txt_buscador).clear()
 
     @allure.step("buscamos el texto \"{texto}\" en la caja de búsqueda")
     def buscar(self, texto) -> None:
@@ -66,11 +66,11 @@ class StackHomePage:
         :param texto: Texto a buscar.
         """
         WebDriverWait(self.driver, 10).until(
-            EC.visibility_of_element_located(self.buscador)
+            EC.visibility_of_element_located(self.txt_buscador)
         )
-        self.driver.find_element(*self.buscador).send_keys(texto)
+        self.driver.find_element(*self.txt_buscador).send_keys(texto)
         with allure.step("presionamos la tecla ENTER"):
-            self.driver.find_element(*self.buscador).send_keys(Keys.ENTER)
+            self.driver.find_element(*self.txt_buscador).send_keys(Keys.ENTER)
 
     @allure.step("Hacemos clic en el botón para reedirigirnos a la página de usuarios")
     def click_usuarios(self) -> None:
