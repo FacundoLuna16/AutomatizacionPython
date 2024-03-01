@@ -21,8 +21,10 @@ class Tests:
         """
         Test para validar la funcionalidad de la caja de búsqueda.
         """
-        with allure.step("Nos dirigimos a la pagina Stack Overflow en español"):
-            driver.get("https://es.stackoverflow.com/")
+        steps = allure.step
+        steps("Nos dirigimos a la pagina Stack Overflow en español")
+
+        driver.get("https://es.stackoverflow.com/")
         home_page = StackHomePage(driver)
         home_page.click_aceptar_cookies()
         home_page.buscar(var_buscar)

@@ -6,3 +6,5 @@ test/__pycache__/*
 config/__pycache__/*
 pages/__pycache__/*
 __pycache__/*
+
+venv/

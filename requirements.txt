@@ -5,3 +5,4 @@ webdriver-manager
 allure-pytest
 pytest-xdist
 faker
+pytest-html
