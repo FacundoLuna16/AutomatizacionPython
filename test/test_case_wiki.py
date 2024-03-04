@@ -7,7 +7,6 @@ class Tests:
 
     @allure.title("Validar Busqueda desde la caja de texto en ingles")
     @allure.description("Validar que la caja de texto funcione correctamente realizando una busqueda y validando el resultado en ingles")
-    @pytest.mark.skip(reason="en desarrollo")
     def test_buscar_en_ingles(self, driver):
         """
         Test para validar la funcionalidad de la caja de búsqueda.

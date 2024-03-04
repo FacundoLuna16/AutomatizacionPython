@@ -18,20 +18,17 @@ class Test:
     Clase para realizar las pruebas de la página de Stack Overflow en español.
     """
 
-    @pytest.mark.skip
+    #@pytest.mark.skip
     @allure.title("Validar Busqueda desde la caja de texto")
     @allure.description(
         "Validar que la caja de texto funcione correctamente realizando una busqueda y validando el resultado"
     )
     @pytest.mark.noprod
-    @pytest.mark.parametrize("busqueda, resultado, navegador, url", datos_ambiente())
-    def test_validar_caja_texto_nuevo(self, driver, busqueda, resultado, navegador, url):
+    @pytest.mark.parametrize("busqueda, resultado, url", datos_ambiente())
+    def test_validar_caja_texto_nuevo(self,driver, busqueda, resultado, url):
         """
         Test para validar la funcionalidad de la caja de búsqueda.
         """
-
-        # driver = BrowserConfig(navegador).select_browser()
-        # driver.maximize_window()
 
         with allure.step("Nos dirigimos a la pagina Stack Overflow en español"):
             driver.get(url)
@@ -43,7 +40,8 @@ class Test:
         result_page = StackResultPage(driver)
         result_page.validar_contenido_URL(resultado)
 
-    # @pytest.mark.skip
+
+
     @allure.title("Validar redireccion a la página de usuarios")
     @allure.description("Validar que se redireccione a la página de usuarios")
     @pytest.mark.smoke
