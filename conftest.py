@@ -1,6 +1,6 @@
 # conftest.py
 import pytest
-from config.configurar_browser import BrowserConfig
+from config.browser import BrowserConfig
 import os
 
 
