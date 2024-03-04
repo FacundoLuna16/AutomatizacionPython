@@ -1,29 +1,33 @@
 # conftest.py
 import pytest
 from config.configurar_browser import BrowserConfig
+import os
 
 
 def pytest_addoption(parser):
+    """
+    Agregar opciones de línea de comandos para seleccionar el navegador
+    """
     parser.addoption("--browser", action="store", default="chrome",
                      help="Escoger navegador: chrome o edge")
+    parser.addoption("--ambiente", action="store", default="qa",
+                     help="Escoger el ambiente de ejecución: qa o prod")
 
 
-def pytest_html_report_title(report):
-    report.title = "Reporte de pruebas automatizadas"
+def pytest_configure(config):
+    os.environ["ambiente"] = config.getoption("ambiente")
+    os.environ["browser"] = config.getoption("browser")
 
 
 @pytest.fixture(autouse=True)
 def driver(request):
+    """
+    Fixture para inicializar el driver del navegador
+    """
+    driver = BrowserConfig(os.getenv("browser")).select_browser()
+    driver.maximize_window()
 
-    browser = request.config.getoption("--browser")
-    print(f"Se ejecutará las pruebas en el navegador {browser}")
-    if browser is None:
-        raise ValueError("No se ha seleccionado un navegador")
-    browser = BrowserConfig(browser)
-    browser = browser.select_browser()
-    browser.maximize_window()
-
-    yield browser  # Retorna el objeto driver para que esté disponible en las pruebas
+    yield driver  # Retorna el objeto driver para que esté disponible en las pruebas
 
     print("Cerrar Browser")
-    browser.quit()
+    driver.quit()
