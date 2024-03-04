@@ -24,7 +24,8 @@ def driver(request):
     """
     Fixture para inicializar el driver del navegador
     """
-    driver = BrowserConfig(os.getenv("browser")).select_browser()
+    browser = request.config.getoption("--browser")
+    driver = BrowserConfig(browser).select_browser()
     driver.maximize_window()
 
     yield driver  # Retorna el objeto driver para que esté disponible en las pruebas
